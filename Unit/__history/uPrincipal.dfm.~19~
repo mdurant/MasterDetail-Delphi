@@ -1,0 +1,207 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Principal'
+  ClientHeight = 387
+  ClientWidth = 505
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid1: TcxGrid
+    Left = 8
+    Top = 9
+    Width = 473
+    Height = 169
+    TabOrder = 0
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsFactura
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      object cxGrid1DBTableView1ID: TcxGridDBColumn
+        DataBinding.FieldName = 'ID'
+      end
+      object cxGrid1DBTableView1NUM_FACTURA: TcxGridDBColumn
+        DataBinding.FieldName = 'NUM_FACTURA'
+      end
+      object cxGrid1DBTableView1FECHA_FACTURA: TcxGridDBColumn
+        DataBinding.FieldName = 'FECHA_FACTURA'
+      end
+      object cxGrid1DBTableView1CLIENTE_FACTURA: TcxGridDBColumn
+        DataBinding.FieldName = 'CLIENTE_FACTURA'
+        Width = 200
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
+    end
+  end
+  object cxGrid2: TcxGrid
+    Left = 8
+    Top = 184
+    Width = 481
+    Height = 169
+    TabOrder = 1
+    object cxGridDBTableView1: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsDetalleFactura
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      ConditionalFormatting = {
+        010000000A000000360000005400640078005300700072006500610064005300
+        680065006500740043006F006E0064006900740069006F006E0061006C004600
+        6F0072006D0061007400740069006E006700520075006C006500540068007200
+        6500650043006F006C006F0072005300630061006C0065003600000000000000
+        0000000000000000FFFFFF7F000000000000FFFF000001000000050000000000
+        0000000000FFFF00000000000000FFFF0000}
+      object cxGridDBTableView1ID: TcxGridDBColumn
+        DataBinding.FieldName = 'ID'
+      end
+      object cxGridDBTableView1ID_FACTURA: TcxGridDBColumn
+        DataBinding.FieldName = 'ID_FACTURA'
+      end
+      object cxGridDBTableView1PRODUCTO: TcxGridDBColumn
+        DataBinding.FieldName = 'PRODUCTO'
+      end
+      object cxGridDBTableView1CANTIDAD: TcxGridDBColumn
+        DataBinding.FieldName = 'CANTIDAD'
+      end
+      object cxGridDBTableView1VALOR_UNITARIO: TcxGridDBColumn
+        DataBinding.FieldName = 'VALOR_UNITARIO'
+      end
+      object cxGridDBTableView1SUB_TOTAL: TcxGridDBColumn
+        DataBinding.FieldName = 'SUB_TOTAL'
+      end
+    end
+    object cxGridLevel1: TcxGridLevel
+      GridView = cxGridDBTableView1
+    end
+  end
+  object Conn: TFDConnection
+    Params.Strings = (
+      'Database=D:\BD\BASE.GDB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Server=localhost'
+      'DriverID=FB')
+    Connected = True
+    LoginPrompt = False
+    Transaction = Transaccion
+    Left = 424
+    Top = 24
+  end
+  object Transaccion: TFDTransaction
+    Connection = Conn
+    Left = 424
+    Top = 80
+  end
+  object qFactura: TFDQuery
+    Active = True
+    Connection = Conn
+    SQL.Strings = (
+      'Select * from FACTURA')
+    Left = 24
+    Top = 72
+    object qFacturaID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayWidth = 5
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qFacturaNUM_FACTURA: TStringField
+      DisplayLabel = 'N'#176' Factura'
+      DisplayWidth = 12
+      FieldName = 'NUM_FACTURA'
+      Origin = 'NUM_FACTURA'
+    end
+    object qFacturaFECHA_FACTURA: TDateField
+      DisplayLabel = 'Fecha Factura'
+      DisplayWidth = 14
+      FieldName = 'FECHA_FACTURA'
+      Origin = 'FECHA_FACTURA'
+    end
+    object qFacturaCLIENTE_FACTURA: TStringField
+      DisplayLabel = 'Cliente'
+      FieldName = 'CLIENTE_FACTURA'
+      Origin = 'CLIENTE_FACTURA'
+      Size = 100
+    end
+  end
+  object dsFactura: TDataSource
+    DataSet = qFactura
+    Left = 72
+    Top = 72
+  end
+  object Driver: TFDPhysFBDriverLink
+    Left = 424
+    Top = 128
+  end
+  object Cursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 440
+    Top = 184
+  end
+  object qDetalleFactura: TFDQuery
+    Active = True
+    IndexFieldNames = 'ID_FACTURA'
+    MasterSource = dsFactura
+    MasterFields = 'ID'
+    DetailFields = 'ID_FACTURA'
+    Connection = Conn
+    FetchOptions.AssignedValues = [evDetailServerCascade]
+    FetchOptions.DetailServerCascade = True
+    SQL.Strings = (
+      'Select * from DETALLE_FACTURA WHERE ID_FACTURA = :ID')
+    Left = 16
+    Top = 168
+    ParamData = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+    object qDetalleFacturaID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qDetalleFacturaID_FACTURA: TIntegerField
+      FieldName = 'ID_FACTURA'
+      Origin = 'ID_FACTURA'
+    end
+    object qDetalleFacturaPRODUCTO: TStringField
+      FieldName = 'PRODUCTO'
+      Origin = 'PRODUCTO'
+      Size = 50
+    end
+    object qDetalleFacturaCANTIDAD: TIntegerField
+      FieldName = 'CANTIDAD'
+      Origin = 'CANTIDAD'
+    end
+    object qDetalleFacturaVALOR_UNITARIO: TSmallintField
+      FieldName = 'VALOR_UNITARIO'
+      Origin = 'VALOR_UNITARIO'
+    end
+    object qDetalleFacturaSUB_TOTAL: TSmallintField
+      FieldName = 'SUB_TOTAL'
+      Origin = 'SUB_TOTAL'
+    end
+  end
+  object dsDetalleFactura: TDataSource
+    DataSet = qDetalleFactura
+    Left = 104
+    Top = 168
+  end
+end

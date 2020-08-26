@@ -1,0 +1,50 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid,
+  FireDAC.Comp.UI, FireDAC.Phys.IBBase;
+
+type
+  TfrmPrincipal = class(TForm)
+    Conn: TFDConnection;
+    Transaccion: TFDTransaction;
+    qFactura: TFDQuery;
+    dsFactura: TDataSource;
+    JvDBGrid1: TJvDBGrid;
+    qFacturaID: TIntegerField;
+    qFacturaNUM_FACTURA: TStringField;
+    qFacturaFECHA_FACTURA: TDateField;
+    qFacturaCLIENTE_FACTURA: TStringField;
+    Driver: TFDPhysFBDriverLink;
+    Cursor: TFDGUIxWaitCursor;
+    qDetalleFactura: TFDQuery;
+    dsDetalleFactura: TDataSource;
+    JvDBGrid2: TJvDBGrid;
+    qDetalleFacturaID: TIntegerField;
+    qDetalleFacturaID_FACTURA: TIntegerField;
+    qDetalleFacturaPRODUCTO: TStringField;
+    qDetalleFacturaCANTIDAD: TIntegerField;
+    qDetalleFacturaVALOR_UNITARIO: TSmallintField;
+    qDetalleFacturaSUB_TOTAL: TSmallintField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,56 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid,
+  FireDAC.Comp.UI, FireDAC.Phys.IBBase, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, dxSkinsCore, dxSkinsDefaultPainters,
+  cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
+  dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog,
+  cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridLevel, cxClasses, cxGridCustomView, cxGrid, JvDBUltimGrid, Vcl.StdCtrls;
+
+type
+  TfrmPrincipal = class(TForm)
+    Conn: TFDConnection;
+    Transaccion: TFDTransaction;
+    qFactura: TFDQuery;
+    dsFactura: TDataSource;
+    qFacturaID: TIntegerField;
+    qFacturaNUM_FACTURA: TStringField;
+    qFacturaFECHA_FACTURA: TDateField;
+    qFacturaCLIENTE_FACTURA: TStringField;
+    Driver: TFDPhysFBDriverLink;
+    Cursor: TFDGUIxWaitCursor;
+    qDetalleFactura: TFDQuery;
+    dsDetalleFactura: TDataSource;
+    qDetalleFacturaID: TIntegerField;
+    qDetalleFacturaID_FACTURA: TIntegerField;
+    qDetalleFacturaPRODUCTO: TStringField;
+    qDetalleFacturaCANTIDAD: TIntegerField;
+    qDetalleFacturaVALOR_UNITARIO: TSmallintField;
+    qDetalleFacturaSUB_TOTAL: TSmallintField;
+    JvDBUltimGrid1: TJvDBUltimGrid;
+    JvDBUltimGrid2: TJvDBUltimGrid;
+    Edit1: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+end.
